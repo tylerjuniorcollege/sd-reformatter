@@ -11,6 +11,13 @@
 	],
 	"require":{
 		"slim/slim": "2.*",
-		"j4mie/idiorm": "1.5.1"
+		"j4mie/idiorm": "1.5.1",
+		"kriswallsmith/buzz": "0.12",
+		"sabberworm/php-css-parser": "*"
+	},
+	"autoload" : {
+		"psr-4": {
+			"TJC\\":"app/src/"
+		}
 	}
 }
