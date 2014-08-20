@@ -10,6 +10,27 @@
 	 * Requirements: PHP 5.3+ and SQLite for simple user/database stores.
 	 **/
 
-	include 'vendor/autoload.php';
+	include '../vendor/autoload.php';
 
-	$app = new \Slim\Slim();
+	$app = new \Slim\Slim(array(
+			//'debug' => true,
+			'view' => new TJC\View(),
+			'templates.path' => '../app/templates'
+		)
+	);
+
+	$app->view->setLayout('layout/layout.php');
+
+	$app->get('/', function() use ($app) {
+		$app->render('index.php', array());
+	});
+
+	$app->get('/about', function() use ($app) {
+		$app->render('about.php', array());
+	});
+
+	$app->post('/html', function() use ($app) {
+
+	});
+
+	$app->run();
