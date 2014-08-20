@@ -1,0 +1,16 @@
+{
+	"name":"tylerjuniorcollege/sd-formatter",
+	"description":"HTML Parser and Reformatter for Forms to be used with the SoftDocs system",
+	"license":"MIT",
+	"authors":[
+		{
+			"name":"Duane Jeffers",
+			"role":"developer",
+			"email":"djef@tjc.edu"
+		}
+	],
+	"require":{
+		"slim/slim": "2.*",
+		"j4mie/idiorm": "1.5.1"
+	}
+}
