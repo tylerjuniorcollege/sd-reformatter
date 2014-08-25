@@ -38,10 +38,16 @@ CREATE TABLE "source" (
   "filename" text NOT NULL,
   "content" text NOT NULL,
   "source_type" integer NOT NULL,
-  "parent_id" integer NULL,
   FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON DELETE CASCADE ON UPDATE NO ACTION,
   FOREIGN KEY ("source_type") REFERENCES "source_type" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION,
-  FOREIGN KEY ("parent_id") REFERENCES "source" ("id") ON DELETE CASCADE ON UPDATE NO ACTION
+);
+
+DROP TABLE IF EXISTS "source_link";
+CREATE TABLE "source_link" (
+  "html_id" integer NOT NULL,
+  "source_id" integer NOT NULL,
+  FOREIGN KEY ("html_id") REFERENCES "source" ("id") ON DELETE CASCADE,
+  FOREIGN KEY ("source_id") REFERENCES "source" ("id")
 );
 
 -- 
