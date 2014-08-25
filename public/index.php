@@ -20,6 +20,8 @@
 		)
 	);
 
+	ORM::configure('sqlite:../data/database.db');
+
 	$app->add(new \Slim\Middleware\SessionCookie);
 	$app->add(new \Zeuxisoo\Whoops\Provider\Slim\WhoopsMiddleware);
 
@@ -35,56 +37,57 @@
 
 	$app->post('/html', function() use ($app) {
 		if($_FILES['fileupload']['error'] != UPLOAD_ERR_OK) {
-			switch($_FILES['fileupload']['error']) {
-				case UPLOAD_ERR_INI_SIZE:
-					$message = 'The Uploaded File is bigger than ' . ini_get('upload_max_filesize');
-					break;
-
-				case UPLOAD_ERR_FORM_SIZE:
-					$message = 'The Uploaded File is bigger than the form specified.';
-					break;
-
-				case UPLOAD_ERR_PARTIAL:
-					$message = 'The file was partially uploaded. Please Try Again.';
-					break;
-
-				case UPLOAD_ERR_NO_FILE:
-					$message = 'No File was Uploaded.';
-					break;
-
-				case UPLOAD_ERR_NO_TMP_DIR:
-					$message = 'Configuration Error. No Temporary Folder was found.';
-					break;
-
-				case UPLOAD_ERR_CANT_WRITE:
-					$message = "Can't write file to disk.";
-					break;
-
-				case UPLOAD_ERR_EXTENSION:
-					$message = 'A PHP Extension blocked the upload.';
-					break;
-			}
-			$app->flash('file-error', $message);
+			$app->flash('file-error', upload_error($_FILES['fileupload']['error']));
 			$app->redirect('/');
 		} elseif($_FILES['fileupload']['type'] != 'text/html') {
 			$app->flash('file-error', 'File is incorrect type. Given: ' . $_FILES['fileupload']['type']);
 			$app->redirect('/');
 		} 
 		// This means that the application has determined that the submitting file is text/html
-		// NOW, we need to store it ...
 
-		$file_contents = file_get_contents($_FILES['fileupload']['tmp_name']);
+		// Check to see if the information has been submitted before ... THIS IS WHY WE MD5 THINGS!!!!
+		$md5 = md5_file($_FILES['fileupload']['tmp_name']);
+		if(source_exists($md5)) {
+			$source = ORM::for_table('source')->where('md5', $md5)->find_one();
+			$app->flash('message', 'Duplicate File Submitted. Using Previously Submitted File.');
+		} else {
+			// NOW, we need to store it ...
+			$source = ORM::for_table('source')->create();
+			$source->set(source_array($_FILES['fileupload']['name'], file_get_contents($_FILES['fileupload']['tmp_name'])));
+			$source->set_expr('submitted', "DateTime('now')");
+			$source->save();
+		}
 
-		var_dump($file_contents);
+		$app->redirect($app->urlFor('parser', array('id' => $source->id())));
 	});
 
 	$app->post('/url', function() use ($app) {
 		$req = Requests::get($app->request->post('url'));
-		var_dump($req->headers['content-type']);
+		if($req->headers['content-type'] != 'text/html') {
+			$app->flash('url-error', 'URL Must direct to an HTML Page. Given: ' . $req->headers['content-type']);
+			$app->redirect('/');
+		}
+
+		// md5 the result and then either submit or redirect to parser.
+		$md5 = md5($req->body);
+		if(source_exists($md5)) {
+			$source = ORM::for_table('source')->where('md5', $md5)->find_one();
+			$app->flash('message', 'Duplicate URL Submitted. Using Previously Submitted URL.');
+		} else {
+			$source = ORM::for_table('source')->create();
+			$source->set(source_array($req->url, $req->body));
+			$source->set_expr('submitted', "DateTime('now')");
+			$source->save();
+		}
+
 	});
 
 	$app->get('/parser/:id', function($id) use($app) {
 
-	});
+	})->name('parser');
+
+	$app->get('/results/:id', function($id) use($app) {
+
+	})->name('results');
 
 	$app->run();
