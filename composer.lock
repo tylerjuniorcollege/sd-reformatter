@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "75bf9c010628532ba3c123f4defe5bb5",
+    "hash": "8f918aeacbd36d4f376017d9c69895d8",
     "packages": [
         {
             "name": "duanejeffers/cli.class.php",
@@ -248,6 +248,49 @@
             "time": "2014-07-03 21:45:17"
         },
         {
+            "name": "shark/simple_html_dom",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/samacs/simple_html_dom.git",
+                "reference": "a7dfed08a6e8d18dc88bc5c73d344f3a6b2316d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/samacs/simple_html_dom/zipball/a7dfed08a6e8d18dc88bc5c73d344f3a6b2316d9",
+                "reference": "a7dfed08a6e8d18dc88bc5c73d344f3a6b2316d9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.4"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "simple_html_dom.php"
+                ],
+                "files": [
+                    "simple_html_dom.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "S.C. Chen",
+                    "email": "me578022@gmail.com",
+                    "homepage": "http://simplehtmldom.sourceforge.net/",
+                    "role": "Lead Developer"
+                }
+            ],
+            "description": "Simple HTML DOM package.",
+            "homepage": "http://simplehtmldom.sourceforge.net/",
+            "keywords": [
+                "dom",
+                "php dom"
+            ],
+            "time": "2012-09-23 01:24:27"
+        },
+        {
             "name": "slim/slim",
             "version": "2.4.3",
             "source": {
@@ -348,7 +391,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "duanejeffers/cli.class.php": 20
+        "duanejeffers/cli.class.php": 20,
+        "shark/simple_html_dom": 20
     },
     "prefer-stable": false,
     "platform": [],

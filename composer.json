@@ -16,11 +16,13 @@
 		"sabberworm/php-css-parser": "*",
 		"duanejeffers/cli.class.php": "dev-master",
 		"filp/whoops": "1.*",
-		"zeuxisoo/slim-whoops": "0.2.0"
+		"zeuxisoo/slim-whoops": "0.2.0",
+		"shark/simple_html_dom": "dev-master"
 	},
 	"autoload" : {
 		"psr-4": {
 			"TJC\\":"app/src/"
-		}
+		},
+		"files": ["app/src/functions.php"]
 	}
 }
