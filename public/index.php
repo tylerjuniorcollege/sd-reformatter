@@ -80,6 +80,7 @@
 			$source->save();
 		}
 
+		$app->redirect($app->urlFor('parser', array('id' => $source->id())));
 	});
 
 	$app->get('/parser/:id', function($id) use($app) {
