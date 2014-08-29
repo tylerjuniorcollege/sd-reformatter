@@ -43,11 +43,11 @@
 	}
 
 	function content_type($content_type) {
-
+		return ORM::for_table('source_type')->select('id')->where('type', $content_type)->find_one();
 	}
 
 	function source_array($filename, $content, $user_id = 1, $type = 'text/html') {
-		$source_type_id = ORM::for_table('source_type')->select('id')->where('type', $type)->find_one();
+		$source_type_id = content_type($type);
 		return array(
 			'uniqid'   	  => uniqid(),
 			'md5'	   	  => md5($content),
