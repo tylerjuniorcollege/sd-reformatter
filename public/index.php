@@ -45,18 +45,8 @@
 		} 
 		// This means that the application has determined that the submitting file is text/html
 
-		// Check to see if the information has been submitted before ... THIS IS WHY WE MD5 THINGS!!!!
-		$md5 = md5_file($_FILES['fileupload']['tmp_name']);
-		if(source_exists($md5)) {
-			$source = ORM::for_table('source')->where('md5', $md5)->find_one();
-			$app->flash('message', 'Duplicate File Submitted. Using Previously Submitted File.');
-		} else {
-			// NOW, we need to store it ...
-			$source = ORM::for_table('source')->create();
-			$source->set(source_array($_FILES['fileupload']['name'], file_get_contents($_FILES['fileupload']['tmp_name'])));
-			$source->set_expr('submitted', "DateTime('now')");
-			$source->save();
-		}
+		$processor = new TJC\Processor\Html(file_get_contents($_FILES['fileupload']['tmp_name']), $_FILES['fileupload']['name']);
+		$source = $processor->process();
 
 		$app->redirect($app->urlFor('parser', array('id' => $source->id())));
 	});
@@ -68,23 +58,22 @@
 			$app->redirect('/');
 		}
 
-		// md5 the result and then either submit or redirect to parser.
-		$md5 = md5($req->body);
-		if(source_exists($md5)) {
-			$source = ORM::for_table('source')->where('md5', $md5)->find_one();
-			$app->flash('message', 'Duplicate URL Submitted. Using Previously Submitted URL.');
-		} else {
-			$source = ORM::for_table('source')->create();
-			$source->set(source_array($req->url, $req->body));
-			$source->set_expr('submitted', "DateTime('now')");
-			$source->save();
-		}
+		$processor = new TJC\Processor\Html($req->body, $req->url);
+		$source = $processor->process();
 
 		$app->redirect($app->urlFor('parser', array('id' => $source->id())));
 	});
 
-	$app->get('/parser/:id', function($id) use($app) {
+	$app->get('/review/:id', function($id) use($app) {
 
+	})->name('review');
+
+	// The parser checks the HTML Based on the requirements for the form.
+	$app->get('/parser/:id', function($id) use($app) {
+		// Grab Current Source
+		$source = ORM::for_table('source')->find_one($id);
+
+		$app->render('parser.php', array('source' => $source));
 	})->name('parser');
 
 	$app->get('/results/:id', function($id) use($app) {
