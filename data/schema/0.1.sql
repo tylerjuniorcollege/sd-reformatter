@@ -45,3 +45,11 @@ CREATE TABLE "source_link" (
   FOREIGN KEY ("html_id") REFERENCES "source" ("id") ON DELETE CASCADE,
   FOREIGN KEY ("source_id") REFERENCES "source" ("id")
 );
+
+DROP TABLE IF EXISTS "logging";
+CREATE TABLE "logging" (
+  "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+  "timestamp" integer NOT NULL,
+  "filename" integer NULL DEFAULT 'inline',
+  "data" text NOT NULL
+);
