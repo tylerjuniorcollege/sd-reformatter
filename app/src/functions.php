@@ -58,6 +58,32 @@
 		);
 	}
 
-	function source_exists($md5_str) {
-		return (ORM::for_table('source')->where('md5', $md5_str)->count() > 0);
+	function source_exists($md5_str, $filename = null) {
+		$where = array(array('md5' => $md5_str));
+		if(!is_null($filename)) {
+			$where[] = array('filename' => $filename);
+		}
+
+		return (ORM::for_table('source')->where_any_is($where)->count() > 0);
+	}
+
+	function alert_view($flash) {
+		$alert_html = '<div class="alert alert-%s alert-dismissible" role="alert">'
+				    . '<button type="button" class="close" data-dismiss="alert">'
+				    . '<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>'
+				    . '</button>'
+				    . '<strong>%s</strong> %s'
+				    . '</div>';
+		foreach($flash as $type => $alert) {
+			switch($type) {
+				case 'url-error':
+				case 'file-error':
+					printf($alert_html, 'danger', ($type == 'url-error' ? 'URL' : 'File Upload') . ' Error:', $alert);
+					break;
+
+				case 'delete-action':
+					printf($alert_html, 'warning', 'File Deleted', $alert);
+					break;
+			}
+		}
 	}
