@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8f918aeacbd36d4f376017d9c69895d8",
+    "hash": "e72416b7ba9aa1a49ad5e5b1c446d3e7",
     "packages": [
         {
             "name": "duanejeffers/cli.class.php",
@@ -158,6 +158,80 @@
             "time": "2014-06-23 13:08:57"
         },
         {
+            "name": "kriswallsmith/assetic",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kriswallsmith/assetic.git",
+                "reference": "7c9639d93558c96ade44f60a4d201b29d68c4d7b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/7c9639d93558c96ade44f60a4d201b29d68c4d7b",
+                "reference": "7c9639d93558c96ade44f60a4d201b29d68c4d7b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.1",
+                "symfony/process": "~2.1"
+            },
+            "require-dev": {
+                "cssmin/cssmin": "*",
+                "joliclic/javascript-packer": "*",
+                "kamicane/packager": "*",
+                "leafo/lessphp": "*",
+                "leafo/scssphp": "*",
+                "leafo/scssphp-compass": "*",
+                "mrclay/minify": "*",
+                "patchwork/jsqueeze": "*",
+                "phpunit/phpunit": "~3.7",
+                "psr/log": "~1.0",
+                "ptachoire/cssembed": "*",
+                "twig/twig": "~1.6"
+            },
+            "suggest": {
+                "leafo/lessphp": "Assetic provides the integration with the lessphp LESS compiler",
+                "leafo/scssphp": "Assetic provides the integration with the scssphp SCSS compiler",
+                "leafo/scssphp-compass": "Assetic provides the integration with the SCSS compass plugin",
+                "patchwork/jsqueeze": "Assetic provides the integration with the JSqueeze JavaScript compressor",
+                "ptachoire/cssembed": "Assetic provides the integration with phpcssembed to embed data uris",
+                "twig/twig": "Assetic provides the integration with the Twig templating engine"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Assetic": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kris Wallsmith",
+                    "email": "kris.wallsmith@gmail.com",
+                    "homepage": "http://kriswallsmith.net/"
+                }
+            ],
+            "description": "Asset Management for PHP",
+            "homepage": "https://github.com/kriswallsmith/assetic",
+            "keywords": [
+                "assets",
+                "compression",
+                "minification"
+            ],
+            "time": "2014-08-27 14:48:43"
+        },
+        {
             "name": "rmccue/requests",
             "version": "v1.6.1",
             "source": {
@@ -253,15 +327,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/samacs/simple_html_dom.git",
-                "reference": "a7dfed08a6e8d18dc88bc5c73d344f3a6b2316d9"
+                "reference": "ac483f192164c270b3c56d300a453210ff99c057"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/samacs/simple_html_dom/zipball/a7dfed08a6e8d18dc88bc5c73d344f3a6b2316d9",
-                "reference": "a7dfed08a6e8d18dc88bc5c73d344f3a6b2316d9",
+                "url": "https://api.github.com/repos/samacs/simple_html_dom/zipball/ac483f192164c270b3c56d300a453210ff99c057",
+                "reference": "ac483f192164c270b3c56d300a453210ff99c057",
                 "shasum": ""
             },
             "require": {
+                "ext-mbstring": "*",
                 "php": ">=5.2.4"
             },
             "type": "library",
@@ -278,8 +353,7 @@
                 {
                     "name": "S.C. Chen",
                     "email": "me578022@gmail.com",
-                    "homepage": "http://simplehtmldom.sourceforge.net/",
-                    "role": "Lead Developer"
+                    "homepage": "http://simplehtmldom.sourceforge.net/"
                 }
             ],
             "description": "Simple HTML DOM package.",
@@ -288,7 +362,7 @@
                 "dom",
                 "php dom"
             ],
-            "time": "2012-09-23 01:24:27"
+            "time": "2014-09-02 22:03:03"
         },
         {
             "name": "slim/slim",
@@ -335,6 +409,53 @@
                 "router"
             ],
             "time": "2014-04-05 18:33:59"
+        },
+        {
+            "name": "symfony/process",
+            "version": "v2.5.4",
+            "target-dir": "Symfony/Component/Process",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Process.git",
+                "reference": "136cf0bdaacea81f779583376d47dd8aef4fc6ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/136cf0bdaacea81f779583376d47dd8aef4fc6ba",
+                "reference": "136cf0bdaacea81f779583376d47dd8aef4fc6ba",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Process\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Symfony Process Component",
+            "homepage": "http://symfony.com",
+            "time": "2014-08-31 03:22:04"
         },
         {
             "name": "zeuxisoo/slim-whoops",
@@ -392,7 +513,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "duanejeffers/cli.class.php": 20,
-        "shark/simple_html_dom": 20
+        "shark/simple_html_dom": 20,
+        "kriswallsmith/assetic": 20
     },
     "prefer-stable": false,
     "platform": [],

@@ -17,7 +17,9 @@
 		"duanejeffers/cli.class.php": "dev-master",
 		"filp/whoops": "1.*",
 		"zeuxisoo/slim-whoops": "0.2.0",
-		"shark/simple_html_dom": "dev-master"
+		"shark/simple_html_dom": "dev-master",
+		"kriswallsmith/assetic": "1.2.*@dev",
+		"patchwork/jsqueeze": "1.0.1"
 	},
 	"autoload" : {
 		"psr-4": {
