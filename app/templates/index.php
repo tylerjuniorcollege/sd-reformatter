@@ -1,5 +1,11 @@
 <div class="container">
 	<div class="row">
+		<div class="col-md-12">
+			<!-- This is the new home for the alerts in the system -->
+			<?php alert_view($flash); ?>
+		</div>
+	</div>
+	<div class="row">
 		<div class="col-md-12 well">
 			<p>Welcome to the SD HTML Formatter. This application is used to help you format your source files for inclusion in to SoftDocs.</p>
 		</div>
@@ -11,11 +17,7 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">Upload HTML Document</h3>
 					</div>
-					<div class="panel-body"><?php if(isset($flash['file-error'])): ?>
-						<div class="alert alert-danger alert-dismissible" role="alert">
-							<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-							<strong>File Upload Error:</strong> <?=$flash['file-error']; ?>
-						</div><?php endif; ?>
+					<div class="panel-body">
 						<div class="fileinput fileinput-new input-group" data-provides="fileinput">
 							<div class="form-control" data-trigger="fileinput">
 								<i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span>
@@ -43,11 +45,7 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">Grab Form from URL</h3>
 					</div>
-					<div class="panel-body"><?php if(isset($flash['url-error'])): ?>
-						<div class="alert alert-danger alert-dismissible" role="alert">
-							<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-							<strong>URL Error:</strong> <?=$flash['url-error']; ?>
-						</div><?php endif; ?>
+					<div class="panel-body">
 						<input class="form-control" type="url" name="url" placeholder="URL String Here ..." />
 					</div>
 					<div class="panel-footer">
