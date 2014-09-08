@@ -65,9 +65,11 @@ class HTML
 	}
 
 	protected function processUrl($url) {
-		$req = \Requests::get($url);
-		var_dump($req);
-		return $this->processor($req->body, $req->url, $req->headers['content-type']);
+		if(!is_null(parse_url($url, PHP_URL_HOST))) {
+			$req = \Requests::get($url);
+			var_dump($req);
+			return $this->processor($req->body, $req->url, $req->headers['content-type']);
+		}
 	}
 
 	protected function processInline($body, $content_type) {
@@ -82,13 +84,8 @@ class HTML
 			if($link->rel != 'stylesheet')
 				continue;
 
-			if(is_null(parse_url($link->href, PHP_URL_HOST))) {
-				// This means that this is a file that needs to be uploaded ... skip for now.
-			} else { // This means that there is an internet host in the href.
-				$this->sources[] = $this->processUrl($link->href);
-			}
+			$this->sources[] = $this->processUrl($link->href);
 		}
-
 		return;
 	}
 
