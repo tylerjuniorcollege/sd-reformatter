@@ -80,4 +80,18 @@
 
 	})->name('results');
 
+	$app->get('/remove/:id', function($id) use($app) {
+		$source = ORM::for_table('source')->find_one($id);
+		$fmr_source = $source->id();
+		$fmr_filename = $source->filename;
+		$source->delete();
+		// Remove all of the sub source files
+
+		ORM::for_table('source_link')->where_equal('source_id', $fmr_source)->delete_many();
+
+		// Redirect to front page.
+		$app->flash('delete-action', $fmr_filename . ' has been deleted from the database.');
+		$app->redirect('/');
+	})->name('remove');
+
 	$app->run();
