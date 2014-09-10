@@ -73,7 +73,13 @@
 		// Grab Current Source
 		$source = ORM::for_table('source')->find_one($id);
 
-		$app->render('parser.php', array('source' => $source));
+		// Send to the parser and send the results to the renderer.
+		$parser = new TJC\Parser\HTML($source->content);
+
+		// This is a read only parse. It gathers the stats of the parse, and then  
+		$results = $parser->parse(null);
+
+		$app->render('parser.php', array('results' => $results));
 	})->name('parser');
 
 	$app->get('/results/:id', function($id) use($app) {
