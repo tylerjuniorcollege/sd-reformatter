@@ -1,0 +1,89 @@
+<?php
+	/**
+	 * SD-Formatter (maybe renamed ... who knows)
+	 *
+	 * (c) Copyright 2014 Tyler Junior College
+	 * See LICENSE file for License details
+	 *
+	 * Purpose: A simple mini web application to make sure HTML is formatted for the SoftDocs system.
+	 * 			Uses Slim Framework and Idiorm.
+	 * Requirements: PHP 5.3+ and SQLite for simple user/database stores.
+	 **/
+
+namespace TJC\Parser;
+
+class HTML
+{
+	const IGNORE_NBSP = 'nbsp';
+	const IGNORE_UNIQUE = 'unique';
+	const IGNORE_READONLY = 'readonly';
+	protected $document;
+	protected $altered_document;
+	protected $doc_object;
+
+	// Submit a string of the HTML document to the class. This will then allow for text replacement to happen.
+	public function __construct($document) {
+		$this->document = $document;
+
+		return $this;
+	}
+
+	public function replace_nbsp() {
+		$this->altered_document = str_replace('&nbsp;', ' ', $this->document, $count);
+		return $count;
+	}
+
+	public function parse_unique_input() {
+		$names = array();
+		$dupe_names = array();
+		//$counter = 0; // This is incremented when there are duplicate names in the document.
+		foreach($this->doc_object->find('input') as $input) {
+			if(!in_array($input->name, $names)) {
+				$names[] = $input->name;
+			} else { // This does already exist.
+				if(!array_key_exists($input->name, $dupe_names) &&
+				   ($input->type != 'radio' || $input->type != 'checkbox')) { // This only exists to suppress any T_NOTICE errors.
+					$dupe_names[$input->name] = 0;
+				}
+				$dupe_names[$input->name] += 1;
+			}
+		}
+
+		return $dupe_names;
+	}
+
+	// This is only done near the end of the file generation. Before saving the final document.
+	public function replace_readonly() {
+		
+	}
+
+	// Parse is the simple function that runs all the automation cleanup code. 
+	// Passing an argument like "nonbsp" or "noreadonly" will stop that action from being run.
+	public function parse() {
+		$args = func_get_args();
+
+		$counters = array();
+		$results = array();
+
+		if(!in_array(self::IGNORE_NBSP, $args)) {
+			$counters['nbsp'] = $this->replace_nbsp();
+		}
+
+		// Now we put the document in the parsing object.
+		$this->doc_object = new \simple_html_dom();
+		$this->doc_object->load($this->altered_document);
+
+		// Check for unique names foreach input element.
+		if(!in_array(self::IGNORE_UNIQUE, $args)) {
+			$results['unique_input'] = $this->parse_unique_input();
+			$counters['unique_input'] = array_sum($results['unique_input']);
+		}
+
+
+
+		// Now we run the readonly removal.
+		if(!in_array(self::IGNORE_READONLY, $args)) {
+			$counters['readonly'] = $this->replace_readonly();
+		}
+	}
+}
