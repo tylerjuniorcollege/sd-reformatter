@@ -1,3 +1,6 @@
+<?php
+use TJC\Parser\HTML as HTMLParser;
+?>
 <div class="container">
 	<?php if(isset($flash['message'])): ?>
 	<div class="row">
@@ -9,5 +12,15 @@
 		</div>
 	</div>
 	<?php endif; ?>
-	
+	<?php foreach($data['results'] as $key => $val): ?>
+	<div class="row">
+		<div class="col-md-12">
+		<?php
+			var_dump($key);
+			print "\n\n";
+			var_dump($val);
+		?>
+		</div>
+	</div>
+	<?php endforeach; ?>
 </div>

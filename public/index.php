@@ -48,7 +48,10 @@
 		$processor = new TJC\Processor\Html(file_get_contents($_FILES['fileupload']['tmp_name']), $_FILES['fileupload']['name']);
 		$source = $processor->process();
 
-		$app->redirect($app->urlFor('parser', array('id' => $source->id())));
+		$app->redirect($app->urlFor('parser', array('id' => $source->id()))); 
+
+		//var_dump($processor->getHtmlObj()->root->children);
+
 	});
 
 	$app->post('/url', function() use ($app) {
@@ -62,6 +65,8 @@
 		$source = $processor->process();
 
 		$app->redirect($app->urlFor('parser', array('id' => $source->id())));
+
+		//var_dump($processor->getHtmlObj()->root);
 	});
 
 	$app->get('/review/:id', function($id) use($app) {
@@ -79,12 +84,19 @@
 		// This is a read only parse. It gathers the stats of the parse, and then  
 		$results = $parser->parse(null);
 
-		$app->render('parser.php', array('results' => $results));
+		$app->render('parser.php', array('results' => $results, 'source' => $source, 'download' => $app->urlFor('download', array('id' => $source->id))));
 	})->name('parser');
 
-	$app->get('/results/:id', function($id) use($app) {
+	/* $app->post('/results/:id', function($id) use($app) {
 
-	})->name('results');
+	})->name('results'); */
+
+	$app->post('/download/:id', function($id) use($app) {
+		// This will download based on the parsed version of the html file.
+
+		$source = ORM::for_table('source')->find_one($id);
+		
+	})->name('download');
 
 	$app->get('/remove/:id', function($id) use($app) {
 		$source = ORM::for_table('source')->find_one($id);
