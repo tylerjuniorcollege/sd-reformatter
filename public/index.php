@@ -93,9 +93,20 @@
 
 	$app->post('/download/:id', function($id) use($app) {
 		// This will download based on the parsed version of the html file.
-
 		$source = ORM::for_table('source')->find_one($id);
+
+		// Now, we check to see if it's an HTML file or an Asset
+		if($source->type == 1) { // Lets do the parsing and then send the file to the browser to download.
+			$parser = new TJC\Parser\HTML($souce->content);
+			$parser->parse(null);
+			$content = $parser->getParsed();
+		} else {
+			// This is other content to be downloaded.
+			$content = $source->content;
+		}
+
 		
+
 	})->name('download');
 
 	$app->get('/remove/:id', function($id) use($app) {

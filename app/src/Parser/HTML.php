@@ -171,4 +171,8 @@ class HTML
 
 		return $counters;
 	}
+
+	public function getParsed() {
+		return $this->doc_object->save();
+	}
 }
