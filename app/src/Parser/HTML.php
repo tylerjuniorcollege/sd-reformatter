@@ -15,13 +15,21 @@ namespace TJC\Parser;
 class HTML
 {
 	const NBSP = 'nbsp';
+	const DISP_NBSP = 'Non-Breaking Space';
 	const UNIQUEINPUT = 'uniqueinput';
+	const DISP_UNIQUEINPUT = 'Has Unique Input Names';
 	const READONLY = 'readonly';
+	const DISP_READONLY = 'Read Only Replacements';
 	const EMPTYTAGS = 'emptytags';
+	const DISP_EMPTYTAGS = 'Number of Empty Tags Updated';
 	const UNIQUEVALUES  = 'uniquevalues';
+	const DISP_UNIQUEVALUES = 'Number of Non-Unique Values';
 	const LABELMATCH = 'labelmatch';
+	const DISP_LABELMATCH = 'Number of Labels that Match';
 	const CLEANVALUES = 'cleanvalues';
+	const DISP_CLEANVALUES = 'Number of Clean Values';
 	const SUBMITBUTTON = 'submitbutton';
+	const DISP_SUBMITBUTTON = 'Submit Button Exists/Removed';
 
 	protected $document;
 	protected $altered_document;

@@ -15,12 +15,11 @@ use TJC\Parser\HTML as HTMLParser;
 	<?php foreach($data['results'] as $key => $val): ?>
 	<div class="row">
 		<div class="col-md-12">
-		<?php
-			var_dump($key);
-			print "\n\n";
-			var_dump($val);
-		?>
+			<?= display_stats($key, $val); ?>
 		</div>
 	</div>
 	<?php endforeach; ?>
+	<?php // Download the files ...
+		
+	?>
 </div>

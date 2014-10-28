@@ -96,7 +96,7 @@
 		$source = ORM::for_table('source')->find_one($id);
 
 		// Now, we check to see if it's an HTML file or an Asset
-		if($source->type == 1) { // Lets do the parsing and then send the file to the browser to download.
+		if($source->source_type == 1) { // Lets do the parsing and then send the file to the browser to download.
 			$parser = new TJC\Parser\HTML($souce->content);
 			$parser->parse(null);
 			$content = $parser->getParsed();
@@ -105,8 +105,22 @@
 			$content = $source->content;
 		}
 
-		
+		$parse_path = parse_url($source->filename);
 
+		$source_type = ORM::for_table('source_type')->find_one($source->source_type);
+
+		// Header for the download button.
+		$headers = array(
+			'Content-type' => $source_type->type,
+			'Content-Disposition' => 'attachment; filename="' . basename($parse_path['path']) . '"'
+		);
+
+		foreach($headers as $header => $content) {
+			header($header . ': ' . $content);
+		}
+
+		echo $content;
+		exit;
 	})->name('download');
 
 	$app->get('/remove/:id', function($id) use($app) {

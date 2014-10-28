@@ -88,18 +88,21 @@
 		}
 	}
 
-	function display_stats($stat_type, $stat_name, $stat_amount, $total_amount, $pass = TRUE) {
+	function display_stats($stat_type, $stat_amount, $pass = TRUE) {
 		if($pass === TRUE) {
 			$passfail = '<span class="glyphicon glyphicon-ok text-success"></span>';
 		} elseif($pass === FALSE) {
 			$passfail = '<span class="glyphicon glyphicon-remove text-danger></span>';
 		}
 
+		$constant = '\TJC\Parser\HTML::DISP_' . strtoupper($stat_type);
+
 		return sprintf('<div class="row">
 			<div class="col-md-3" id="passfail">%s</div>
 			<div class="col-md-9">
 				<h4>%s</h4>
 				<p id="%s">%s</p>
-			</div></div>', $passfail, $stat_name, $stat_type, $stat_amount);
+			</div></div>', $passfail, constant($constant), $stat_type, $stat_amount);
 	}
+
 
