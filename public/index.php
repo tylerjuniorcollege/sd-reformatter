@@ -84,20 +84,22 @@
 		// This is a read only parse. It gathers the stats of the parse, and then  
 		$results = $parser->parse(null);
 
-		$app->render('parser.php', array('results' => $results, 'source' => $source, 'download' => $app->urlFor('download', array('id' => $source->id))));
+		$sources = ORM::for_table('source_link')->where('html_id', $source->id)->find_many();
+
+		$app->render('parser.php', array('results' => $results, 'source' => $source, 'sources' => $sources));
 	})->name('parser');
 
 	/* $app->post('/results/:id', function($id) use($app) {
 
 	})->name('results'); */
 
-	$app->post('/download/:id', function($id) use($app) {
+	$app->get('/download/:id', function($id) use($app) {
 		// This will download based on the parsed version of the html file.
 		$source = ORM::for_table('source')->find_one($id);
 
 		// Now, we check to see if it's an HTML file or an Asset
 		if($source->source_type == 1) { // Lets do the parsing and then send the file to the browser to download.
-			$parser = new TJC\Parser\HTML($souce->content);
+			$parser = new TJC\Parser\HTML($source->content);
 			$parser->parse(null);
 			$content = $parser->getParsed();
 		} else {
@@ -105,19 +107,20 @@
 			$content = $source->content;
 		}
 
-		$parse_path = parse_url($source->filename);
-
 		$source_type = ORM::for_table('source_type')->find_one($source->source_type);
-
+		$type = $source_type->type;
+		$filename = parsed_filename($source->filename, $type);
 		// Header for the download button.
-		$headers = array(
-			'Content-type' => $source_type->type,
-			'Content-Disposition' => 'attachment; filename="' . basename($parse_path['path']) . '"'
+		/* $headers = array(
+			'Content-type' => 'application/octet-stream',
+			'Content-Disposition' => 'attachment; filename="' . parsed_filename($source->filename, $source_type->type) . '"'
 		);
 
 		foreach($headers as $header => $content) {
 			header($header . ': ' . $content);
-		}
+		} */
+		header("Content-type: $type");
+		header("Content-Disposition:attachment;filename=\"$filename\"");
 
 		echo $content;
 		exit;
