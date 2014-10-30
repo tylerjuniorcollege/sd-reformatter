@@ -88,6 +88,38 @@
 		}
 	}
 
+	function parsed_filename($filename, $source_type) {
+		$parsed = parse_url($filename);
+
+		$filename = basename($parsed['path']);
+		$info = pathinfo($filename);
+
+		// If the filename doesn't include the extension we should add it.
+		switch($source_type) {
+			case 'text/html':
+				$ext = 'html';
+				break;
+
+			case 'text/css':
+				$ext = 'css';
+				break;
+
+			case 'text/javascript':
+			case 'application/x-javascript':
+			case 'application/javascript':
+				$ext = 'js';
+				break;
+		}
+
+		if(!isset($info['extension'])) {
+			$filename .= '.' . $ext;
+		} elseif(empty($info['extension'])) {
+			$filename .= $ext;
+		}
+
+		return $filename;
+	}
+
 	function display_stats($stat_type, $stat_amount, $pass = TRUE) {
 		if($pass === TRUE) {
 			$passfail = '<span class="glyphicon glyphicon-ok text-success"></span>';
@@ -97,12 +129,26 @@
 
 		$constant = '\TJC\Parser\HTML::DISP_' . strtoupper($stat_type);
 
-		return sprintf('<div class="row">
-			<div class="col-md-3" id="passfail">%s</div>
-			<div class="col-md-9">
-				<h4>%s</h4>
-				<p id="%s">%s</p>
-			</div></div>', $passfail, constant($constant), $stat_type, $stat_amount);
+		return sprintf('<tr>
+			<td class="passfail">%s</td>
+			<td>%s: %s</td>
+			</tr>', $passfail, constant($constant), $stat_amount);
 	}
 
+	function display_download($id) {
+		$app = \Slim\Slim::getInstance();
+
+		$source = ORM::for_table('source')->find_one($id);
+
+		if($source->filename == 'inline') {
+			return; // Remove all instances of the inline script for download at the current moment.
+		}
+
+		$source_type = ORM::for_table('source_type')->find_one($source->source_type);
+
+		return sprintf('<tr> 
+			<td><a href="%s">Download</a></td>
+			<td>%s</td>
+			</tr>', $app->urlFor('download', array('id' => $source->id)), parsed_filename($source->filename, $source_type->type));
+	}
 
