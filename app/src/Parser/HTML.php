@@ -93,7 +93,6 @@ class HTML
 	public function remove_submit() {
 		$submit = $this->doc_object->find('input[type=submit]', 'button[type=submit]');
 
-		var_dump($submit);
 		if(!empty($submit)) {
 			$submit->outertext = '';
 			return 1;
@@ -143,7 +142,6 @@ class HTML
 		// Check for unique names foreach input element.
 		if(!in_array(self::UNIQUEINPUT, $args)) {
 			$results[self::UNIQUEINPUT] = $this->parse_unique_input();
-			var_dump($results[self::UNIQUEINPUT]);
 			$counters[self::UNIQUEINPUT] = array_sum($results[self::UNIQUEINPUT]);
 		}
 
