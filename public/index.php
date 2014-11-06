@@ -49,9 +49,6 @@
 		$source = $processor->process();
 
 		$app->redirect($app->urlFor('parser', array('id' => $source->id()))); 
-
-		//var_dump($processor->getHtmlObj()->root->children);
-
 	});
 
 	$app->post('/url', function() use ($app) {
@@ -65,8 +62,6 @@
 		$source = $processor->process();
 
 		$app->redirect($app->urlFor('parser', array('id' => $source->id())));
-
-		//var_dump($processor->getHtmlObj()->root);
 	});
 
 	$app->get('/review/:id', function($id) use($app) {
