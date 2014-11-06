@@ -6,13 +6,13 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12 well">
-			<p>Welcome to the SD HTML Formatter. This application is used to help you format your source files for inclusion in to SoftDocs.</p>
+		<div class="col-md-12 page-header">
+			<h3>Welcome to the SD HTML Formatter.</h3>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<form class="form" method="post" action="/html" enctype="multipart/form-data">
+	<form class="form" method="post" action="/submit" enctype="multipart/form-data">
+		<div class="row">
+			<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<h3 class="panel-title">Upload HTML Document</h3>
@@ -30,17 +30,11 @@
 							<a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
 						</div>
 					</div>
-					<div class="panel-footer">
-						<button type="submit" class="btn btn-primary btn-sm pull-right">Submit</button>
-						<div class="clearfix"></div>
-					</div>
 				</div>
-			</form>
+			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<form method="post" action="/url" class="form">
+		<div class="row">
+			<div class="col-md-12">
 				<div class="panel panel-success">
 					<div class="panel-heading">
 						<h3 class="panel-title">Grab Form from URL</h3>
@@ -48,12 +42,10 @@
 					<div class="panel-body">
 						<input class="form-control" type="url" name="url" placeholder="URL String Here ..." />
 					</div>
-					<div class="panel-footer">
-						<button type="submit" class="btn btn-primary btn-sm pull-right">Submit</button>
-						<div class="clearfix"></div>
-					</div>
 				</div>
-			</form>
+			</div>
 		</div>
-	</div>
+		<button type="submit" class="btn btn-primary btn-sm pull-right">Submit</button>
+		<div class="clearfix"></div>
+	</form>
 </div>

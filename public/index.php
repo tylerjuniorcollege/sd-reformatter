@@ -35,12 +35,30 @@
 		$app->render('about.php', array());
 	});
 
-	$app->post('/html', function() use ($app) {
-		if($_FILES['fileupload']['error'] != UPLOAD_ERR_OK) {
+	$app->post('/submit', function() use ($app) {
+		if($_FILES['fileupload']['error'] === UPLOAD_ERR_NO_FILE && !empty($app->request->post('url'))) {
+			// URL instead of file ...
+			$req = Requests::get($app->request->post('url'));
+
+			$content_type = $req->headers['content-type'];
+			$error_type = 'url-error';
+
+			// We want to change the output file name ...
+
+		} elseif($_FILES['fileupload']['error'] === UPLOAD_ERR_OK) {
+			// File uploaded ...
+			$content_type = $_FILES['fileupload']['type'];
+			$error_type = 'file-error';
+
+		}
+
+		if($_FILES['fileupload']['error'] != UPLOAD_ERR_OK && empty($app->request->post('url'))) {
 			$app->flash('file-error', upload_error($_FILES['fileupload']['error']));
 			$app->redirect('/');
-		} elseif($_FILES['fileupload']['type'] != 'text/html') {
-			$app->flash('file-error', 'File is incorrect type. Given: ' . $_FILES['fileupload']['type']);
+		}
+
+		if($content_type != 'text/html') {
+			$app->flash($error_type, 'File is incorrect type. Given: ' . $content_type);
 			$app->redirect('/');
 		} 
 		// This means that the application has determined that the submitting file is text/html
@@ -52,11 +70,6 @@
 	});
 
 	$app->post('/url', function() use ($app) {
-		$req = Requests::get($app->request->post('url'));
-		if($req->headers['content-type'] != 'text/html') {
-			$app->flash('url-error', 'URL Must direct to an HTML Page. Given: ' . $req->headers['content-type']);
-			$app->redirect('/');
-		}
 
 		$processor = new TJC\Processor\Html($req->body, $req->url);
 		$source = $processor->process();
@@ -105,15 +118,7 @@
 		$source_type = ORM::for_table('source_type')->find_one($source->source_type);
 		$type = $source_type->type;
 		$filename = parsed_filename($source->filename, $type);
-		// Header for the download button.
-		/* $headers = array(
-			'Content-type' => 'application/octet-stream',
-			'Content-Disposition' => 'attachment; filename="' . parsed_filename($source->filename, $source_type->type) . '"'
-		);
-
-		foreach($headers as $header => $content) {
-			header($header . ': ' . $content);
-		} */
+		
 		header("Content-type: $type");
 		header("Content-Disposition:attachment;filename=\"$filename\"");
 
