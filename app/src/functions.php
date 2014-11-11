@@ -149,6 +149,12 @@
 		return sprintf('<tr> 
 			<td><a href="%s">Download</a></td>
 			<td>%s</td>
-			</tr>', $app->urlFor('download', array('id' => $source->id)), parsed_filename($source->filename, $source_type->type));
+			</tr>', clean_link('download', $source->id), parsed_filename($source->filename, $source_type->type));
+	}
+
+	function clean_link($url_name, $id) {
+		$app = \Slim\Slim::getInstance();
+
+		return $app->urlFor($url_name, array('id' => $id));
 	}
 
