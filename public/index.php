@@ -101,6 +101,27 @@
 
 	})->name('results'); */
 
+	$app->get('/display/:id', function($id) use($app) {
+		$source = ORM::for_table('source')->find_one($id);
+
+		echo $source->content;
+		die;
+	})->name('display');
+
+	$app->get('/display/parsed/:id', function($id) use($app) {
+		// Grab Current Source
+		$source = ORM::for_table('source')->find_one($id);
+
+		// Send to the parser and send the results to the renderer.
+		$parser = new TJC\Parser\HTML($source->content);
+
+		// This is a read only parse. It gathers the stats of the parse, and then  
+		$parser->parse(null);
+
+		echo $parser->getParsed();
+		die;
+	})->name('displayparsed');
+
 	$app->get('/download/:id', function($id) use($app) {
 		// This will download based on the parsed version of the html file.
 		$source = ORM::for_table('source')->find_one($id);

@@ -65,4 +65,36 @@ use TJC\Parser\HTML as HTMLParser;
 			</table>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-md-12 page-header">
+			<h3>View Code<small class="pull-right"><span class="glyphicon glyphicon-chevron-down"></span></small></h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-condensed table-striped">
+				<colgroup>
+					<col class="col-md-4">
+					<col class="col-md-4">
+					<col class="col-md-4">
+				</colgroup>
+				<thead>
+					<tr>
+						<th>File</th>
+						<th>Display Original HTML</th>
+						<th>Display Parsed HTML</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><?= parsed_filename($data['source']->filename, 'text/html'); ?></td>
+						<?php foreach(array('display' => 'Display',
+										 'displayparsed' => 'Parsed') as $linktype => $linktext) {
+								printf('<td><a href="%s">%s</a></td>', clean_link($linktype, $data['source']->id), $linktext);
+							} ?>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
