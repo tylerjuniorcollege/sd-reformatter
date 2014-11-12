@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e72416b7ba9aa1a49ad5e5b1c446d3e7",
+    "hash": "4b86ef90f0edc611af88bc2a606456ba",
     "packages": [
         {
             "name": "duanejeffers/cli.class.php",
@@ -43,16 +43,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "1.1.2",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "9f451fbc7b8cad5e71300672c340c28c6bec09ff"
+                "reference": "a85fab9a98f1f9b8ebcdbe71733f0d910e5b9adf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/9f451fbc7b8cad5e71300672c340c28c6bec09ff",
-                "reference": "9f451fbc7b8cad5e71300672c340c28c6bec09ff",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/a85fab9a98f1f9b8ebcdbe71733f0d910e5b9adf",
+                "reference": "a85fab9a98f1f9b8ebcdbe71733f0d910e5b9adf",
                 "shasum": ""
             },
             "require": {
@@ -97,7 +97,7 @@
                 "whoops",
                 "zf2"
             ],
-            "time": "2014-07-11 05:56:54"
+            "time": "2014-10-26 09:05:09"
         },
         {
             "name": "j4mie/idiorm",
@@ -163,12 +163,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kriswallsmith/assetic.git",
-                "reference": "7c9639d93558c96ade44f60a4d201b29d68c4d7b"
+                "reference": "eb82167d176eb40078469ef9408ff56fd32a5d66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/7c9639d93558c96ade44f60a4d201b29d68c4d7b",
-                "reference": "7c9639d93558c96ade44f60a4d201b29d68c4d7b",
+                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/eb82167d176eb40078469ef9408ff56fd32a5d66",
+                "reference": "eb82167d176eb40078469ef9408ff56fd32a5d66",
                 "shasum": ""
             },
             "require": {
@@ -183,8 +183,8 @@
                 "leafo/scssphp": "*",
                 "leafo/scssphp-compass": "*",
                 "mrclay/minify": "*",
-                "patchwork/jsqueeze": "*",
-                "phpunit/phpunit": "~3.7",
+                "patchwork/jsqueeze": "~1.0",
+                "phpunit/phpunit": "~4",
                 "psr/log": "~1.0",
                 "ptachoire/cssembed": "*",
                 "twig/twig": "~1.6"
@@ -229,7 +229,50 @@
                 "compression",
                 "minification"
             ],
-            "time": "2014-08-27 14:48:43"
+            "time": "2014-10-30 11:33:12"
+        },
+        {
+            "name": "patchwork/jsqueeze",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nicolas-grekas/JSqueeze.git",
+                "reference": "95f014738f93b5e0cf855da3745e5f617c41bec6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nicolas-grekas/JSqueeze/zipball/95f014738f93b5e0cf855da3745e5f617c41bec6",
+                "reference": "95f014738f93b5e0cf855da3745e5f617c41bec6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.1.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "JSqueeze": "class/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "(Apache-2.0 or GPL-2.0)"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Efficient JavaScript minification in PHP",
+            "homepage": "https://github.com/nicolas-grekas/JSqueeze",
+            "keywords": [
+                "compression",
+                "javascript",
+                "minification"
+            ],
+            "time": "2014-08-05 07:46:33"
         },
         {
             "name": "rmccue/requests",
@@ -327,12 +370,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/samacs/simple_html_dom.git",
-                "reference": "ac483f192164c270b3c56d300a453210ff99c057"
+                "reference": "842b3fc1f9f0c70b8c1b2e93fc451834c42e384d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/samacs/simple_html_dom/zipball/ac483f192164c270b3c56d300a453210ff99c057",
-                "reference": "ac483f192164c270b3c56d300a453210ff99c057",
+                "url": "https://api.github.com/repos/samacs/simple_html_dom/zipball/842b3fc1f9f0c70b8c1b2e93fc451834c42e384d",
+                "reference": "842b3fc1f9f0c70b8c1b2e93fc451834c42e384d",
                 "shasum": ""
             },
             "require": {
@@ -362,7 +405,7 @@
                 "dom",
                 "php dom"
             ],
-            "time": "2014-09-02 22:03:03"
+            "time": "2014-10-17 00:16:28"
         },
         {
             "name": "slim/slim",
@@ -412,17 +455,17 @@
         },
         {
             "name": "symfony/process",
-            "version": "v2.5.4",
+            "version": "v2.5.6",
             "target-dir": "Symfony/Component/Process",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Process.git",
-                "reference": "136cf0bdaacea81f779583376d47dd8aef4fc6ba"
+                "reference": "9bbacbb3a7a27b17c0d51e2f126f59e0e588ad3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/136cf0bdaacea81f779583376d47dd8aef4fc6ba",
-                "reference": "136cf0bdaacea81f779583376d47dd8aef4fc6ba",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/9bbacbb3a7a27b17c0d51e2f126f59e0e588ad3a",
+                "reference": "9bbacbb3a7a27b17c0d51e2f126f59e0e588ad3a",
                 "shasum": ""
             },
             "require": {
@@ -455,7 +498,44 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "http://symfony.com",
-            "time": "2014-08-31 03:22:04"
+            "time": "2014-10-01 05:50:18"
+        },
+        {
+            "name": "tylerjuniorcollege/slim-layout",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tylerjuniorcollege/slim-layout.git",
+                "reference": "2fcc57019290d66f5557ac5d94c1279ff0027c37"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tylerjuniorcollege/slim-layout/zipball/2fcc57019290d66f5557ac5d94c1279ff0027c37",
+                "reference": "2fcc57019290d66f5557ac5d94c1279ff0027c37",
+                "shasum": ""
+            },
+            "require": {
+                "slim/slim": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "ViewLayout.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Duane Jeffers",
+                    "email": "djef@tjc.edu",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple Layout Class for Slim Framework",
+            "time": "2014-10-31 21:54:52"
         },
         {
             "name": "zeuxisoo/slim-whoops",
@@ -512,6 +592,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "tylerjuniorcollege/slim-layout": 20,
         "duanejeffers/cli.class.php": 20,
         "shark/simple_html_dom": 20,
         "kriswallsmith/assetic": 20

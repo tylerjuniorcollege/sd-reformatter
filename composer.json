@@ -12,6 +12,7 @@
 	"require":{
 		"slim/slim": "2.*",
 		"j4mie/idiorm": "1.5.1",
+		"tylerjuniorcollege/slim-layout":"dev-master",
 		"rmccue/requests": ">=1.0",
 		"sabberworm/php-css-parser": "*",
 		"duanejeffers/cli.class.php": "dev-master",
@@ -22,9 +23,6 @@
 		"patchwork/jsqueeze": "1.0.1"
 	},
 	"autoload" : {
-		"psr-4": {
-			"TJC\\":"app/src/"
-		},
-		"files": ["app/src/functions.php"]
+		"files": ["app/src/functions.php", "app/src/Parser/HTML.php", "app/src/Processor/HTML.php"]
 	}
 }
