@@ -10,7 +10,7 @@
 	 * Requirements: PHP 5.3+ and SQLite for simple user/database stores.
 	 **/
 
-namespace TJC;
+/* namespace TJC;
 
 use \Slim\View as SlimView;
 
@@ -48,4 +48,4 @@ class View extends SlimView {
 			return parent::render($template, $data);
 		}
 	}
-}
+} */
