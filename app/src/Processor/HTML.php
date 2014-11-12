@@ -27,10 +27,6 @@ class HTML
 	protected function processor($body, $filename, $content_type) {
 		$md5 = md5($body);
 
-		// Setup the link between sources.
-		$source_link = \ORM::for_table('source_link')->create();
-		$source_link->html_id = $this->html_src_obj->id();
-
 		// Check to see if source exists or not.
 		if(source_exists($md5)) {
 			$source = \ORM::for_table('source')->where('md5', $md5)->find_one();
@@ -57,9 +53,18 @@ class HTML
 			$source->save();
 		}
 
-		// Save source link.
-		$source_link->source_id = $source->id();
-		$source_link->save();
+		// Add a check to see if the source link exists already.
+		$exists = \ORM::for_table('source_link')->where(array('html_id' => $this->html_src_obj->id(),
+															 'source_id' => $source->id()))->count();
+
+		if($exists == 0) {
+			// Save source link.
+			// Setup the link between sources.
+			$source_link = \ORM::for_table('source_link')->create();
+			$source_link->html_id = $this->html_src_obj->id();
+			$source_link->source_id = $source->id();
+			$source_link->save();
+		}
 
 		return $source;
 	}
@@ -67,7 +72,6 @@ class HTML
 	protected function processUrl($url) {
 		if(!is_null(parse_url($url, PHP_URL_HOST))) {
 			$req = \Requests::get($url);
-			var_dump($req);
 			return $this->processor($req->body, $req->url, $req->headers['content-type']);
 		}
 	}
