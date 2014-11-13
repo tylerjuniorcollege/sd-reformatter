@@ -171,6 +171,10 @@
 		exit;
 	})->name('download');
 
+	$app->get('/download/zip/:id', function($id) use($app) {
+
+	})->name('downloadzip');
+
 	$app->get('/remove/:id', function($id) use($app) {
 		$source = ORM::for_table('source')->find_one($id);
 		$fmr_source = $source->id();
