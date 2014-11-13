@@ -185,6 +185,9 @@
 				case 'transform':
 					return "Clean Transform.xsl";
 					break;
+				case 'downloadzip':
+					return "Download Zipped HTML";
+					break;
 			}	
 		};
 
@@ -202,7 +205,7 @@
 $dropdown = <<<HTML
 <li class="dropdown">
 	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Tools <span class="caret"></span></a>
-	<ul class="dropdown-menu" role="menu">
+	<ul class="dropdown-menu pull-right" role="menu">
 	%s
 	</ul>
 </li>

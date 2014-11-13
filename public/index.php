@@ -98,7 +98,8 @@
 												 'divider2' => 'divider',
 												 'transform' => $source->id,
 												 'divider3' => 'divider',
-												 'downloadzip', $source->id));
+												 'downloadzip' => $source->id
+												));
 
 		$app->render('parser.php', array('results' => $results, 'source' => $source, 'sources' => $sources));
 	})->name('parser');
