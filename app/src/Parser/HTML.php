@@ -11,8 +11,9 @@
 	 **/
 
 namespace TJC\Parser;
+use TJC\Parser\ParserAbstract;
 
-class HTML
+class HTML extends ParserAbstract
 {
 	const NBSP = 'nbsp';
 	const DISP_NBSP = 'Non-Breaking Space';
@@ -31,16 +32,7 @@ class HTML
 	const SUBMITBUTTON = 'submitbutton';
 	const DISP_SUBMITBUTTON = 'Submit Button Exists/Removed';
 
-	protected $document;
-	protected $altered_document;
 	protected $doc_object;
-
-	// Submit a string of the HTML document to the class. This will then allow for text replacement to happen.
-	public function __construct($document) {
-		$this->document = $document;
-
-		return $this;
-	}
 
 	public function replace_nbsp() {
 		$this->altered_document = str_replace('&nbsp;', ' ', $this->document, $count);
