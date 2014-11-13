@@ -14,7 +14,7 @@
 
 	$app = new \Slim\Slim(array(
 			//'debug' => true,
-			'view' => new TJC\View(),
+			'view' => new \TJC\ViewLayout(),
 			'templates.path' => '../app/templates',
 			'whoops.editor' => 'sublime'
 		)
