@@ -84,6 +84,14 @@
 				case 'delete-action':
 					printf($alert_html, 'warning', 'File Deleted', $alert);
 					break;
+
+				case 'parser-error':
+					printf($alert_html, 'danger', 'Parser Error', $alert);
+					break;
+
+				default:
+					printf($alert_html, 'warning', '', $alert);
+					break;
 			}
 		}
 	}
