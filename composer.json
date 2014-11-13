@@ -23,6 +23,15 @@
 		"patchwork/jsqueeze": "1.0.1"
 	},
 	"autoload" : {
-		"files": ["app/src/functions.php", "app/src/Parser/HTML.php", "app/src/Processor/HTML.php"]
+		"files": [
+			"app/src/functions.php",
+			"app/src/Parser/ParserAbstract.php",
+			"app/src/Processor/ProcessorAbstract.php",
+			"app/src/Parser/HTML.php", 
+			"app/src/Processor/HTML.php", 
+			"app/src/Parser/Transform.php",
+			"app/src/Processor/Transform.php",
+			"app/src/Parser/Options.php"
+			]
 	}
 }
