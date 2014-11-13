@@ -158,3 +158,47 @@
 		return $app->urlFor($url_name, array('id' => $id));
 	}
 
+	function navbar_tools($data_arr) {
+		if(!isset($data_arr['tools']) || empty($data_arr['tools'])) { // If the array doesn't exist OR if it's empty, then kick it back without the tools link.
+			return;
+		}
+
+		$clean_titles = function($tool) {
+			switch($tool) {
+				case 'edit':
+					return "Edit";
+					break;
+				case 'display':
+					return "View Original HTML";
+					break;
+				case 'displayparsed':
+					return "View Parsed HTML";
+					break;
+				case 'transform':
+					return "Clean Transform.xsl";
+					break;
+			}	
+		};
+
+		$tool_arr = array();
+
+		foreach($data_arr['tools'] as $tool => $id) {
+			if(substr($tool, 0, 7)  == 'divider') {
+				$tool_arr[] = '<li class="divider"></li>';
+				continue;
+			}
+			$tool_arr[] = sprintf('<li><a href="%s">%s</a></li>', clean_link($tool, $id), $clean_titles($tool));
+		}
+
+// Icky HEREDOC stuff to make this string all super nice
+$dropdown = <<<HTML
+<li class="dropdown">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Tools <span class="caret"></span></a>
+	<ul class="dropdown-menu" role="menu">
+	%s
+	</ul>
+</li>
+HTML;
+
+		return sprintf($dropdown, implode($tool_arr));
+	}

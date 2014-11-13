@@ -90,6 +90,16 @@
 
 		$sources = ORM::for_table('source_link')->where('html_id', $source->id)->find_many();
 
+		// Adding in the Tools Dropdown.
+		$app->view->setLayoutData('tools', array('edit' => $source->id, 
+												 'divider1' => 'divider',
+												 'display' => $source->id,
+												 'displayparsed' => $source->id,
+												 'divider2' => 'divider',
+												 'transform' => $source->id,
+												 'divider3' => 'divider',
+												 'downloadzip', $source->id));
+
 		$app->render('parser.php', array('results' => $results, 'source' => $source, 'sources' => $sources));
 	})->name('parser');
 

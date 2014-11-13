@@ -84,7 +84,8 @@
 			  		<a class="navbar-brand" href="/">SDFormatter</a>
 				</div>
 				<div class="collapse navbar-collapse">
-			  		<ul class="nav navbar-nav">
+			  		<ul class="nav navbar-nav pull-right">
+			  			<?= navbar_tools($data) ?>
 			  		</ul>
 				</div><!--/.nav-collapse -->
 		  	</div>
