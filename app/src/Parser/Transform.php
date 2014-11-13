@@ -16,5 +16,11 @@ use TJC\Parser\ParserAbstract;
 // This is the main parser for the Transform.xsl file. Right now, it only removes opening and closing <!CDATA[]> tags.
 class Transform extends ParserAbstract
 {
+	public function parse() {
 
+	}
+
+	public function getParsed() {
+		
+	}
 }

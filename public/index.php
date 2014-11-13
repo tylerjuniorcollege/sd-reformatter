@@ -121,9 +121,9 @@
 		$html_source = ORM::for_table('source')->find_one($id);
 		$source_type = ORM::for_table('source_type')->find_one($html_source->source_type);
 		$type = $source_type->type;
-		$filename = parsed_filename($source->filename, $type);
+		$filename = parsed_filename($html_source->filename, $type);
 
-		$app->render('transform.php', array('filename' => $filenamee));
+		$app->render('transform.php', array('filename' => $filename));
 	})->via('GET', 'POST')->name('transform');
 
 	$app->get('/display/:id', function($id) use($app) {
