@@ -40,12 +40,16 @@
 			$error_type = 'url-error';
 
 			// We want to change the output file name ...
+			$filename = $req->url;
+			$content = $req->body;
 
 		} elseif($_FILES['fileupload']['error'] === UPLOAD_ERR_OK) {
 			// File uploaded ...
 			$content_type = $_FILES['fileupload']['type'];
 			$error_type = 'file-error';
 
+			$filename = $_FILES['fileupload']['name'];
+			$content = file_get_contents($_FILES['fileupload']['tmp_name']);
 		}
 
 		if($_FILES['fileupload']['error'] != UPLOAD_ERR_OK && empty($app->request->post('url'))) {
@@ -56,31 +60,33 @@
 		if($content_type != 'text/html') {
 			$app->flash($error_type, 'File is incorrect type. Given: ' . $content_type);
 			$app->redirect('/');
-		} 
-		// This means that the application has determined that the submitting file is text/html
+		} // This means that the application has determined that the submitting file is text/html
 
-		$processor = new TJC\Processor\Html(file_get_contents($_FILES['fileupload']['tmp_name']), $_FILES['fileupload']['name']);
+		// Check if there is a new filename.
+		if(!empty($app->request->post('outfilename'))) {
+			$filename = $app->request->post('outfilename');
+		}
+
+		$processor = new \TJC\Processor\Html($content, $filename);
 		$source = $processor->process();
 
 		$app->redirect($app->urlFor('parser', array('id' => $source->id()))); 
 	});
 
-	$app->post('/url', function() use ($app) {
+	$app->get('/edit/:id', function($id) use($app) {
 
-		$processor = new TJC\Processor\Html($req->body, $req->url);
-		$source = $processor->process();
-
-		$app->redirect($app->urlFor('parser', array('id' => $source->id())));
-	});
-
-	$app->get('/review/:id', function($id) use($app) {
-
-	})->name('review');
+	})->name('edit');
 
 	// The parser checks the HTML Based on the requirements for the form.
 	$app->get('/parser/:id', function($id) use($app) {
 		// Grab Current Source
 		$source = ORM::for_table('source')->find_one($id);
+
+		if($source === FALSE) {
+			$app->flash('parser-error', 'Source Does Not Exist in the Database.');
+			$app->redirect('/');
+			return;
+		}
 
 		// Send to the parser and send the results to the renderer.
 		$parser = new TJC\Parser\HTML($source->content);

@@ -1,3 +1,9 @@
+<?php // Parser Options.
+	$options = array();
+	foreach(\TJC\Parser\HTML::options() as $option => $disp) {
+		$options[] = sprintf('<div class="checkbox"><label class="checkbox"><input type="checkbox" name="outputoptions[%s]" value="1" checked="checked">%s</label></div>', $option, $disp);
+	}
+?>
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
@@ -45,7 +51,70 @@
 				</div>
 			</div>
 		</div>
-		<button type="submit" class="btn btn-primary btn-sm pull-right">Submit</button>
-		<div class="clearfix"></div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-info">
+					<div class="panel-heading" role="tab" id="settingsHeading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-target="#settingsCollapse" href="#settingsCollapse" aria-expanded="true" aria-controls="settingsCollapse">Settings</a>
+							<a data-toggle="collapse" data-target="#settingsCollapse" href="#settingsCollapse" aria-expanded="true" aria-controls="settingsCollapse" class="pull-right"><span class="glyphicon glyphicon-chevron-down"></span></a>
+						</h4>
+					</div>
+					<div id="settingsCollapse" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="settingsHeading">
+						<div class="panel-body">
+							<div class="form-horizontal row">
+								<div class="form-group col-md-6">
+									<label for="outfilename" class="col-md-4 label-control">Output Filename</label>
+									<div class="col-md-8">
+										<input type="text" class="form-control" name="outfilename" placeholder="output.html" />
+									</div>
+								</div>
+								<div class="form-group col-md-6 pull-right">
+									<label class="checkbox-inline"><input type="checkbox" name="changeassetdir" value="1" data-toggle="collapse" data-target=".assetdircollapse" aria-expanded="false" aria-controls="assetdircollapse" /> Change Asset Directories</label>
+									<label class="checkbox-inline"><input type="checkbox" name="compressassets" value="1" /> Compress Assets</label>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="form-horizontal row">
+								<div class="form-group col-md-6 assetdircollapse collapse">
+									<label for="scriptsdir" class="col-md-4 label-control">Scripts Directory</label>
+									<div class="col-md-8">
+										<input type="text" class="form-control" name="scriptsdir" value="scripts/" />
+									</div>
+								</div>
+								<div class="form-group col-md-6 assetdircollapse collapse">
+									<label for="styledir" class="col-md-4 label-control">Styles Directory</label>
+									<div class="col-md-8">
+										<input type="text" class="form-control" name="styledir" value="styles/" />
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-target="#outputSettings" href="#outputSettings" aria-expanded="false" aria-controls="outputSettings">Output Options</a>
+										<a data-toggle="collapse" data-target="#outputSettings" href="#outputSettings" aria-expanded="false" aria-controls="outputSettings" class="pull-right"><span class="glyphicon glyphicon-chevron-down"></span></a>
+									</h4>
+								</div>
+								<div id="outputSettings" class="panel-collapse collapse">
+									<div class="panel-body">
+										<?= implode($options); ?>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel-footer">
+						<button type="submit" class="btn btn-primary btn-sm pull-right">Submit</button>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-1 col-md-offset-11">
+				
+			</div>
+		</div>
 	</form>
 </div>

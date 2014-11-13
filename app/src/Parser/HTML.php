@@ -34,6 +34,17 @@ class HTML extends ParserAbstract
 
 	protected $doc_object;
 
+	public static function options() {
+		return array(self::NBSP => self::DISP_NBSP,
+					 self::UNIQUEINPUT => self::DISP_UNIQUEINPUT,
+					 self::READONLY => self::DISP_READONLY,
+					 self::EMPTYTAGS => self::DISP_EMPTYTAGS,
+					 self::UNIQUEVALUES => self::DISP_UNIQUEVALUES,
+					 self::LABELMATCH => self::DISP_LABELMATCH,
+					 self::CLEANVALUES => self::DISP_CLEANVALUES,
+					 self::SUBMITBUTTON => self::DISP_SUBMITBUTTON);
+	}
+	
 	public function replace_nbsp() {
 		$this->altered_document = str_replace('&nbsp;', ' ', $this->document, $count);
 		return $count;
