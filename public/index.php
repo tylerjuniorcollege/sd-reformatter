@@ -31,10 +31,6 @@
 		$app->render('index.php', array());
 	});
 
-	$app->get('/about', function() use ($app) {
-		$app->render('about.php', array());
-	});
-
 	$app->post('/submit', function() use ($app) {
 		if($_FILES['fileupload']['error'] === UPLOAD_ERR_NO_FILE && !empty($app->request->post('url'))) {
 			// URL instead of file ...
@@ -100,6 +96,24 @@
 	/* $app->post('/results/:id', function($id) use($app) {
 
 	})->name('results'); */
+
+	$app->map('/transform/:id', function($id) use($app) {
+		// Check to see if it's a POST
+		if($app->request->isPost()) {
+			// Parse and Send as a Download.
+			$processor = new TJC\Processor\Tranform();
+			$source = $processor->process();
+
+			$app->redirect($app->urlFor('download', array('id' => $source->id())));
+			return;
+		}
+		$html_source = ORM::for_table('source')->find_one($id);
+		$source_type = ORM::for_table('source_type')->find_one($html_source->source_type);
+		$type = $source_type->type;
+		$filename = parsed_filename($source->filename, $type);
+
+		$app->render('transform.php', array('filename' => $filenamee));
+	})->via('GET', 'POST')->name('transform');
 
 	$app->get('/display/:id', function($id) use($app) {
 		$source = ORM::for_table('source')->find_one($id);
