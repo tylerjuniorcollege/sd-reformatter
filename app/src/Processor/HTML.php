@@ -182,4 +182,12 @@ class HTML
 
 		return $source;
 	}
+
+	public function injectJavascript($js_code, $filename = 'inject') {
+		return $this->processor($js_code, $filename, 'text/javascript');
+	}
+
+	public function injectCss($css_code, $filename = 'inject') {
+		return $this->processor($css_code, $filename, 'text/css');
+	}
 }

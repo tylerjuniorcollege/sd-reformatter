@@ -174,7 +174,7 @@
 
 		$source = ORM::for_table('source')->find_one($id);
 
-		if($source->filename == 'inline') {
+		if($source->filename == 'inline' || $source->filename == 'inject') {
 			return; // Remove all instances of the inline script for download at the current moment.
 		}
 

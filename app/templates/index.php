@@ -69,9 +69,10 @@
 										<input type="text" class="form-control" name="outfilename" placeholder="output.html" />
 									</div>
 								</div>
-								<div class="form-group col-md-6 pull-right">
+								<div class="form-group col-md-6">
 									<label class="checkbox-inline"><input type="checkbox" name="changeassetdir" value="1" data-toggle="collapse" data-target=".assetdircollapse" aria-expanded="false" aria-controls="assetdircollapse" /> Change Asset Directories</label>
 									<label class="checkbox-inline"><input type="checkbox" name="compressassets" value="1" /> Compress Assets</label>
+									<label class="checkbox-inline"><input type="checkbox" name="injectassets" value="1" />Add Inline Javascript/CSS</label>
 								</div>
 								<div class="clearfix"></div>
 							</div>
