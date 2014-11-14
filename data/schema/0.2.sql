@@ -33,26 +33,42 @@ CREATE TABLE "source_link" (
 );
 
 
+DROP TABLE IF EXISTS "source_settings";
+CREATE TABLE "source_settings" (
+  "source_id" integer NOT NULL,
+  "asset_compression" integer NOT NULL DEFAULT '0',
+  "script_dir" text NULL,
+  "style_dir" text NULL,
+  "output_options" text NOT NULL,
+  "injectassets" integer NOT NULL DEFAULT '0',
+  FOREIGN KEY ("source_id") REFERENCES "source" ("id") ON DELETE CASCADE ON UPDATE NO ACTION
+);
+
+
+DROP TABLE IF EXISTS "source_transform";
+CREATE TABLE "source_transform" (
+  "html_id" integer NOT NULL,
+  "transform_id" integer NOT NULL,
+  FOREIGN KEY ("html_id") REFERENCES "source" ("id") ON DELETE CASCADE,
+  FOREIGN KEY ("transform_id") REFERENCES "source" ("id") ON DELETE CASCADE
+);
+
+
 DROP TABLE IF EXISTS "source_type";
 CREATE TABLE "source_type" (
   "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
   "type" text NOT NULL
 );
 
-INSERT INTO "source_type" ("id", "type") VALUES (1,	'text/html');
-INSERT INTO "source_type" ("id", "type") VALUES (2,	'text/css');
-INSERT INTO "source_type" ("id", "type") VALUES (3,	'text/javascript');
-INSERT INTO "source_type" ("id", "type") VALUES (4,	'application/x-javascript');
-INSERT INTO "source_type" ("id", "type") VALUES (5,	'application/javascript');
-INSERT INTO "source_type" ("id", "type") VALUES (6,	'text/plain');
-
-DROP TABLE IF EXISTS "sqlite_sequence";
-CREATE TABLE sqlite_sequence(name,seq);
-
-INSERT INTO "sqlite_sequence" ("name", "seq") VALUES ('source_type',	'6');
-INSERT INTO "sqlite_sequence" ("name", "seq") VALUES ('users',	'1');
-INSERT INTO "sqlite_sequence" ("name", "seq") VALUES ('source',	'24');
-INSERT INTO "sqlite_sequence" ("name", "seq") VALUES ('logging',	'43');
+INSERT INTO "source_type" ("id", "type") VALUES (1, 'text/html');
+INSERT INTO "source_type" ("id", "type") VALUES (2, 'text/css');
+INSERT INTO "source_type" ("id", "type") VALUES (3, 'text/javascript');
+INSERT INTO "source_type" ("id", "type") VALUES (4, 'application/x-javascript');
+INSERT INTO "source_type" ("id", "type") VALUES (5, 'application/javascript');
+INSERT INTO "source_type" ("id", "type") VALUES (6, 'text/plain');
+INSERT INTO "source_type" ("id", "type") VALUES (7, 'text/xsl');
+INSERT INTO "source_type" ("id", "type") VALUES (8, 'text/xml');
+INSERT INTO "source_type" ("id", "type") VALUES (9, 'application/xml');
 
 DROP TABLE IF EXISTS "users";
 CREATE TABLE "users" (
@@ -61,6 +77,6 @@ CREATE TABLE "users" (
   "password" text NOT NULL
 );
 
-INSERT INTO "users" ("id", "username", "password") VALUES (1,	'anonymous',	'');
+INSERT INTO "users" ("id", "username", "password") VALUES (1, 'anonymous',  '');
 
 -- 

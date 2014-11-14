@@ -70,8 +70,31 @@
 		$processor = new \TJC\Processor\Html($content, $filename);
 		$source = $processor->process();
 
-		$app->redirect($app->urlFor('parser', array('id' => $source->id()))); 
+		// Save Settings for the file.
+		$settings = source_settings($source->id(), $app->request->post());
+
+		if($settings->injectassets === 1) {
+			// Redirect to inject page.
+			$page = 'inject';
+		} else {
+			$page = 'parser';
+		}
+
+		$app->redirect($app->urlFor($page, array('id' => $source->id()))); 
 	});
+
+	$app->map('/inject/:id', function($id) use($app) {
+		$source = ORM::for_table('source')->find_one($id);
+		if($app->request->isPost()) {
+			// Inject via the processor.
+			$processor = new \TJC\Processor\HTML($source->content, $source->filename);
+
+			
+		}
+		
+
+		$app->render('inject.php', array());
+	})->via('GET', 'POST')->name('inject');
 
 	$app->get('/edit/:id', function($id) use($app) {
 

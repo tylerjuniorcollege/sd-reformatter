@@ -67,6 +67,32 @@
 		return (ORM::for_table('source')->where_any_is($where)->count() > 0);
 	}
 
+	function source_settings($source_id, $postvars) {
+		$settings = ORM::for_table('source_settings')->create();
+		$settings->set(array('source_id' => $source_id,
+							 'output_options' => serialize($postvars['outputoptions'])));
+
+		foreach($postvars as $id => $val) {
+			switch($id) {
+				case 'compressassets':
+					$settings->asset_compression = 1;
+					break;
+
+				case 'injectassets':
+					$settings->injectassets = 1;
+					break;
+
+				case 'changeassetdir':
+					$settings->script_dir = $postvars['scriptsdir'];
+					$settings->style_dir = $postvars['styledir'];
+					break;
+			}
+		}
+
+		$settings->save();
+		return $settings;
+	}
+
 	function alert_view($flash) {
 		$alert_html = '<div class="alert alert-%s alert-dismissible" role="alert">'
 				    . '<button type="button" class="close" data-dismiss="alert">'
