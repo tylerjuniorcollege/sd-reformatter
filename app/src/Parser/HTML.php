@@ -94,8 +94,10 @@ class HTML extends ParserAbstract
 
 	// Removing the submit button.
 	public function remove_submit() {
-		$submit = $this->doc_object->find('input[type=submit]', 'button[type=submit]');
-
+		$submit = $this->doc_object->find('input[type=submit], button[type=submit]');
+		
+		var_dump($submit);
+		die;
 		if(!empty($submit)) {
 			$submit->outertext = '';
 			return 1;
