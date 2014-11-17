@@ -13,6 +13,7 @@
 		"slim/slim": "2.*",
 		"j4mie/idiorm": "1.5.1",
 		"tylerjuniorcollege/slim-layout":"dev-master",
+		"bariew/phpquery": "1.0.2",
 		"rmccue/requests": ">=1.0",
 		"sabberworm/php-css-parser": "*",
 		"duanejeffers/cli.class.php": "dev-master",
