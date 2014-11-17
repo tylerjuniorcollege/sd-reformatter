@@ -94,7 +94,7 @@ class HTML extends ParserAbstract
 
 	// Removing the submit button.
 	public function remove_submit() {
-		$submit = $this->doc_object->find('input[type=submit], button[type=submit]');
+		/* $submit = $this->doc_object->find('button');
 		
 		var_dump($submit);
 		die;
@@ -102,7 +102,7 @@ class HTML extends ParserAbstract
 			$submit->outertext = '';
 			return 1;
 		} else
-			return 0;
+			return 0; */
 	}
 
 
@@ -143,6 +143,7 @@ class HTML extends ParserAbstract
 		// Now we put the document in the parsing object.
 		$this->doc_object = new \simple_html_dom();
 		$this->doc_object->load($this->altered_document);
+		// Replacing simple_html_dom with phpQuery.
 
 		// Check for unique names foreach input element.
 		if(!in_array(self::UNIQUEINPUT, $args)) {
