@@ -546,12 +546,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tylerjuniorcollege/slim-layout.git",
-                "reference": "2fcc57019290d66f5557ac5d94c1279ff0027c37"
+                "reference": "6835eadfd555c6c8e7743a6049f07fca7d5ca63a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tylerjuniorcollege/slim-layout/zipball/2fcc57019290d66f5557ac5d94c1279ff0027c37",
-                "reference": "2fcc57019290d66f5557ac5d94c1279ff0027c37",
+                "url": "https://api.github.com/repos/tylerjuniorcollege/slim-layout/zipball/6835eadfd555c6c8e7743a6049f07fca7d5ca63a",
+                "reference": "6835eadfd555c6c8e7743a6049f07fca7d5ca63a",
                 "shasum": ""
             },
             "require": {
@@ -559,9 +559,9 @@
             },
             "type": "library",
             "autoload": {
-                "files": [
-                    "ViewLayout.php"
-                ]
+                "psr-4": {
+                    "TJC\\View\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -575,7 +575,7 @@
                 }
             ],
             "description": "Simple Layout Class for Slim Framework",
-            "time": "2014-10-31 21:54:52"
+            "time": "2014-11-18 22:29:21"
         },
         {
             "name": "zeuxisoo/slim-whoops",
