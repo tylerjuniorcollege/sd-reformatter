@@ -1,44 +1,3 @@
-<?php
-  // Add CSS and Javascript files on the fly ...
-	$css = array(
-		array(
-			'file' => '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'
-		),
-		array(
-			'inline' => "body { padding-top: 60px; }"
-		),
-		array(
-			'file' => '//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css'
-		),
-		/* array(
-			'file' => '//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/lumen/bootstrap.min.css'
-		) */
-	);
-
-	$js = array(
-		array(
-			'file' => 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'
-		),
-		array(
-			'file' => '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'
-		),
-		array(
-			'file' => '//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js'
-		)
-	);
-  
-	if(isset($data['css']) && is_array($data['css'])) {
-		$data['css'] = array_merge($css, $data['css']);
-  	} elseif (!isset($data['css'])) {
-		$data['css'] = $css;
-  	}
-
-  	if(isset($data['js']) && is_array($data['js'])) {
-		$data['js'] = array_merge($js, $data['js']);
-  	} elseif (!isset($data['js'])) {
-		$data['js'] = $js;
-  	}
-?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -50,19 +9,7 @@
 
 		<title>SoftDocs Formatter</title>
 
-<?php
-	foreach($data['css'] as $arr) {
-		switch(current(array_keys($arr))) {
-	  		case 'file':
-				echo "\t\t<link href=\"{$arr['file']}\" rel=\"stylesheet\">\n";
-				break;
-
-	  		case 'inline':
-				echo "\t\t<style type-\"text/css\">{$arr['inline']}</style>\n";
-				break;
-		}
-  	}
-?>
+		<?= implode($data['css']['rendered'], "\n\t\t"); ?>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -98,20 +45,6 @@
 				</div>
 		  	</div>
 		</div>
-<?php
-	foreach($data['js'] as $arr) {
-		echo "\t\t<script type=\"text/javascript\"";
-		switch(current(array_keys($arr))) {
-	  		case 'file':
-				echo "src=\"{$arr['file']}\">";
-				break;
-
-	  		case 'inline':
-				echo ">{$arr['inline']}";
-				break;
-		}
-		echo "</script>\n";
-  	}
-?>
+	<?= implode($data['js']['rendered'], "\n\t"); ?>
 	</body>
 </html>

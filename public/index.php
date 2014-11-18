@@ -13,8 +13,8 @@
 	include '../vendor/autoload.php';
 
 	$app = new \Slim\Slim(array(
-			//'debug' => true,
-			'view' => new \TJC\ViewLayout(),
+			'debug' => true,
+			'view' => new \TJC\View\Layout(),
 			'templates.path' => '../app/templates',
 			'whoops.editor' => 'sublime'
 		)
@@ -26,6 +26,16 @@
 	$app->add(new \Zeuxisoo\Whoops\Provider\Slim\WhoopsMiddleware);
 
 	$app->view->setLayout('layout/layout.php');
+
+	// This is the default layout files.
+ 	$app->view->appendJavascriptFile('https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+			  ->appendJavascriptFile('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js')
+			  ->appendJavascriptFile('//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js');
+
+	$app->view->appendStylesheet('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
+			  ->appendStyle("body { padding-top: 60px; }")
+			  ->appendStylesheet('//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css');
+			  
 
 	$app->get('/', function() use ($app) {
 		$app->render('index.php', array());
@@ -87,9 +97,10 @@
 		$source = ORM::for_table('source')->find_one($id);
 		if($app->request->isPost()) {
 			// Inject via the processor.
-			$processor = new \TJC\Processor\HTML($source->content, $source->filename);
+			//$processor = new \TJC\Processor\HTML($source->content, $source->filename);
 
-			
+			var_dump($app->request->post());
+			die();
 		}
 		
 
